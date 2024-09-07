@@ -10,7 +10,6 @@ import { generateEmbeddings } from '../ai/embedding';
 import { embeddings as embeddingsTable } from '../db/schema/embeddings';
 
 export const createResource = async (input: NewResourceParams) => {
-  try {
     const { content } = insertResourceSchema.parse(input);
 
     const [resource] = await db
@@ -25,11 +24,4 @@ export const createResource = async (input: NewResourceParams) => {
         ...embedding,
       })),
     );
-
-    return 'Resource successfully created and embedded.';
-  } catch (error) {
-    return error instanceof Error && error.message.length > 0
-      ? error.message
-      : 'Error, please try again.';
-  }
 };
