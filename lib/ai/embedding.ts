@@ -3,34 +3,9 @@ import { openai } from '@ai-sdk/openai';
 import { db } from '../db';
 import { cosineDistance, desc, gt, sql } from 'drizzle-orm';
 import { embeddings } from '../db/schema/embeddings';
+import { generateChunks } from './utils';
 
 const embeddingModel = openai.embedding('text-embedding-ada-002');
-
-const generateChunks = (input: string, maxChunkSize: number): string[] => {
-  const sentences = input
-    .trim()
-    .split('.')
-    .filter(i => i !== '');
-
-  const chunks: string[] = [];
-  let currentChunk = '';
-
-  sentences.forEach(sentence => {
-    const sentenceWithDot = sentence + '.';
-    if ((currentChunk + sentenceWithDot).length > maxChunkSize) {
-      chunks.push(currentChunk);
-      currentChunk = sentenceWithDot;
-    } else {
-      currentChunk += sentenceWithDot;
-    }
-  });
-
-  if (currentChunk) {
-    chunks.push(currentChunk);
-  }
-
-  return chunks;
-};
 
 export const generateEmbeddings = async (
   value: string,
