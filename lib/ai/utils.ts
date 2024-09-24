@@ -10,7 +10,7 @@ export const generateChunks = (input: string, maxChunkSize: number): string[] =>
     sentences.forEach(sentence => {
       const sentenceWithDot = sentence + '.';
       if ((currentChunk + sentenceWithDot).length > maxChunkSize) {
-        chunks.push(currentChunk);
+        chunks.push(currentChunk.trimStart());
         currentChunk = sentenceWithDot;
       } else {
         currentChunk += sentenceWithDot;
@@ -18,7 +18,7 @@ export const generateChunks = (input: string, maxChunkSize: number): string[] =>
     });
   
     if (currentChunk) {
-      chunks.push(currentChunk);
+      chunks.push(currentChunk.trimStart());
     }
   
     return chunks;
