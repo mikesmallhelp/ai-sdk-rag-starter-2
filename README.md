@@ -18,13 +18,8 @@ Note:
 The project has been modified so that the chatbot doesn't add new resources as it did initially. New resources are added by the api ```/api/recources```, for example by the Curl command
 
 ```
-curl -X POST -H "Content-Type: application/json" -d @resource.json http://localhost:3000/api/resources
+curl -X POST https://ai-sdk-rag-starter-2.vercel.app/api/resources -H "Content-Type: text/plain" -d "Your text here"
 ```
 
-where resource.json format is:
+The project is also modified so that the program splits each text for 5000 characters long chunks.
 
-```
-{
-    "content": "Chatbot likes meatballs"
-}
-```
