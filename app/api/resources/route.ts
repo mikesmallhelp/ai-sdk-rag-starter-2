@@ -3,7 +3,9 @@ import { NextResponse } from 'next/server';
 
 export async function POST(req: Request) {
   try {
-    const { content } = await req.json();
+    const content = await req.text();
+
+    console.log('content:', content);
 
     if (!content || typeof content !== 'string') {
       return NextResponse.json({ error: 'Invalid content' }, { status: 400 });
