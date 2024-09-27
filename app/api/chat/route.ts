@@ -10,7 +10,7 @@ export async function POST(req: Request) {
   const { messages } = await req.json();
 
   const result = await streamText({
-    model: openai('gpt-4o'),
+    model: openai('gpt-4o-mini'),
     messages: convertToCoreMessages(messages),
     system: `You are a helpful assistant. Check your knowledge base before answering any questions.
     Only respond to questions using information from tool calls.
